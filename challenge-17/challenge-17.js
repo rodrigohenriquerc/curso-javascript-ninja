@@ -42,7 +42,7 @@
   minúsculo por "0" (número zero). Mostre o resultado no console:
   */
   console.log('\nTrocando de "D" a "h" por "0":');
-  console.log(text.replace(/[D-h]/g, 0));
+  console.log(text.replace(/[D-Hd-h]/g, 0));
 
   /*
   Substitua todos os "A" (maiúsculos ou minúsculos) por "4".
@@ -74,20 +74,14 @@
   */
   console.log('\nMeses representados por números:');
   function getMonthNumber(month) {
-    switch (month) {
-      case 'março':
-        return '03';
-      case 'junho':
-        return '06';
-      case 'julho':
-        return '07';
-      case 'setembro':
-        return '09';
-      case 'dezembro':
-        return '12';
-      default:
-        'Mês inválido.';
-    }
+    var months = {
+      março: '03',
+      junho: '06',
+      julho: '07',
+      setembro: '09',
+      dezembro: '12',
+    };
+    return months[month];
   }
   var month1 = 'março';
   var month2 = 'junho';
@@ -109,7 +103,6 @@
   Mostre a regex no console.
   */
   console.log('\nRegex que vai fazer o match com as datas do texto:');
-  // var regexDate = text.match(/(\d\d) de (junho|julho) de (\d\d\d\d)/g);
   var regexDate = /(\d\d) de (junho|julho) de (\d\d\d\d)/g;
   console.log(regexDate);
 
@@ -121,8 +114,8 @@
   console o resultado.
   */
   console.log('\nReplace de datas:');
-  var newText = text.replace(regexDate, function (date, day, month, year) {
-      return `${day}/${getMonthNumber(month)}/${year}`;
-    });
-  console.log(newText);
+  function replaceDate(regex, day, month, year) {
+    return `${day}/${getMonthNumber(month)}/${year}`;
+  }
+  console.log(text.replace(regexDate, replaceDate));
 })();
